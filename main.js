@@ -1,4 +1,10 @@
 import { Tree } from "./bst.js"
-let test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
-test.buildTree()
-test.prettyPrint()
+let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+tree.buildTree()
+tree.prettyPrint()
+tree.insert(20)
+console.log('\n')
+tree.insert(24)
+tree.insert(25)
+tree.insert(30)
+tree.prettyPrint()

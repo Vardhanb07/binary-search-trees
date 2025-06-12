@@ -7,7 +7,7 @@ class Node {
     }
 }
 export class Tree {
-    constructor(array, root) {
+    constructor(array , root) {
         this.array = []
         let set = new Set([])
         array.forEach(i => {
@@ -17,7 +17,6 @@ export class Tree {
             this.array.push(i)
         })
         this.array = mergeSort(this.array)
-        let mid = parseInt((0 + this.array.length)/2)
         this.root = null
     }
     #bbst(array, left, right) {
@@ -46,5 +45,64 @@ export class Tree {
             this.prettyPrint(root.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
         }
     }
-
+    insert(value, root = this.root) {
+        if(root == null) {
+            return 
+        }
+        if(root.data > value) { 
+            if(root.left != null && root.right == null) {
+                if(root.data < value) {
+                    root.right = new Node(value)
+                    return
+                }
+            } else if(root.right != null && root.left == null) {
+                if(root.data > value) {
+                    root.left = new Node(value)
+                    return
+                }
+            } else if(root.left == null && root.left == null) {
+                if(root.data > value) {
+                    root.left = new Node(value)
+                } else if(root.data < value) {
+                    root.right = new Node(value)
+                }
+                return
+            }
+            this.insert(value, root.left)
+            return
+        } else if(root.data < value) {
+            if(root.left != null && root.right == null) {
+                if(root.data < value) {
+                    root.right = new Node(value)
+                    return
+                }
+            } else if(root.right != null && root.left == null) {
+                if(root.data > value) {
+                    root.left = new Node(value)
+                    return
+                }
+            } else if(root.left == null && root.left == null) {
+                if(root.data > value) {
+                    root.left = new Node(value)
+                } else if(root.data < value) {
+                    root.right = new Node(value)
+                }
+                return
+            }
+            this.insert(value, root.right)
+            return
+        }
+    }
+    find(value, root = this.root) {
+        if(root == null) {
+            return null
+        }
+        if(root.data == value) {
+            return root
+        } else if(root.data > value) {
+            return this.find(value, root.left)
+        } else if(root.data < value) {
+            return this.find(value, root.right)
+        }
+    }
 }
